@@ -49,7 +49,7 @@ int main(void)
 		print_vectors(cur_pv,cur_vv,cur_t);
 	// simulation main loop
 		// xTRA Code:{
-			finish_time = 10 * 365;
+			//finish_time = 10 * 365;
 		//}
 		while(cur_t < finish_time)
 		{
@@ -67,7 +67,7 @@ int main(void)
 
 				// xTRA Code:{
 					// char c;
-					printf("\n%01.12E\n",(G * M_sun * cur_pv.x / tmp ));
+					// printf("\n%01.12E\n",(G * M_sun * cur_pv.x / tmp ));
 					//scanf("%c",&c);
 				//}
 
@@ -75,7 +75,7 @@ int main(void)
 				cur_pv = next_pv;
 				cur_vv = next_vv;
 			// print on the screen
-				// print_vectors(cur_pv,cur_vv,cur_t);
+				print_vectors(cur_pv,cur_vv,cur_t);
 		}
 
 	return 0;
