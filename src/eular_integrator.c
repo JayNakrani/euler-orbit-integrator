@@ -32,7 +32,7 @@ int main(void)
 	const long double G = 6.67384E-17;
 	const long double M_sun = 1.9891E+30;
 	// misc
-		long double tmp = 0;
+		long double divisor_tmp = 0;
 	
 	// initialize
 		cur_pv.x = 5.096210785220794E+08;
@@ -61,10 +61,10 @@ int main(void)
 				next_pv.y = cur_pv.y + (cur_vv.vy * DAY_TO_SEC(dt));
 				next_pv.z = cur_pv.z + (cur_vv.vz * DAY_TO_SEC(dt));
 			// compute velocity vector 
-				tmp = sqrtl(powl( (powl(NORMALIZE_POS(cur_pv.x),2)+powl(NORMALIZE_POS(cur_pv.y),2)+powl(NORMALIZE_POS(cur_pv.z),2)),3)) * 1E+04;	// Use of normalized values for powering.
-				next_vv.vx = cur_vv.vx - (G * M_sun * cur_pv.x / tmp );
-				next_vv.vy = cur_vv.vy - (G * M_sun * cur_pv.y / tmp );
-				next_vv.vz = cur_vv.vz - (G * M_sun * cur_pv.z / tmp );
+				divisor_tmp = sqrtl(powl( (powl(NORMALIZE_POS(cur_pv.x),2)+powl(NORMALIZE_POS(cur_pv.y),2)+powl(NORMALIZE_POS(cur_pv.z),2)),3)) * 1E+04;	// Use of normalized values for powering.
+				next_vv.vx = cur_vv.vx - (G * M_sun * cur_pv.x / divisor_tmp );
+				next_vv.vy = cur_vv.vy - (G * M_sun * cur_pv.y / divisor_tmp );
+				next_vv.vz = cur_vv.vz - (G * M_sun * cur_pv.z / divisor_tmp );
 
 				// xTRA Code:{
 					// char c;
