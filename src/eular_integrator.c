@@ -4,7 +4,7 @@
 #define DAY_TO_SEC(DT) (DT * 24 * 3600)
 #define NORMALIZE_POS(A) (A/1E+08)
 
-#define _DEBUG_
+//#define _DEBUG_
 
 typedef struct struct_position_vector
 {
@@ -28,7 +28,7 @@ int main(void)
 	position_vector cur_pv,next_pv; // position vectors
 	velocity_vector cur_vv,next_vv; // velocity vectors
 	long double cur_t = 0;	//current time
-	long double finish_time = 30 * 365; // total number of days. 30 years multiplied by 365 days a year. Ignoring leap years for now..!!
+	long double finish_time = 10 * 365; // total number of days. 30 years multiplied by 365 days a year. Ignoring leap years for now..!!
 	long double dt = 0.1;	// delta-t in number of days
 	// constants
 	const long double G = 6.67384E-17;
@@ -66,13 +66,13 @@ int main(void)
 				next_pv.z = cur_pv.z + (cur_vv.vz * DAY_TO_SEC(dt));
 			// compute velocity vector 
 				divisor_tmp = sqrtl(powl( (powl(NORMALIZE_POS(cur_pv.x),2)+powl(NORMALIZE_POS(cur_pv.y),2)+powl(NORMALIZE_POS(cur_pv.z),2)),3)) * 1E+04;	// Use of normalized values for powering.
-				next_vv.vx = cur_vv.vx - (G * M_sun * cur_pv.x / divisor_tmp );
-				next_vv.vy = cur_vv.vy - (G * M_sun * cur_pv.y / divisor_tmp );
-				next_vv.vz = cur_vv.vz - (G * M_sun * cur_pv.z / divisor_tmp );
+				next_vv.vx = cur_vv.vx - ( (G/1E-17) * (M_sun/1E+30) * NORMALIZE_POS(cur_pv.x) / divisor_tmp * 1E+21);
+				next_vv.vy = cur_vv.vy - ( (G/1E-17) * (M_sun/1E+30) * NORMALIZE_POS(cur_pv.y) / divisor_tmp * 1E+21);
+				next_vv.vz = cur_vv.vz - ( (G/1E-17) * (M_sun/1E+30) * NORMALIZE_POS(cur_pv.z) / divisor_tmp * 1E+21);
 
 				#ifdef _DEBUG_
 					char c;
-					printf("\n%01.12LE\n",(G * M_sun * cur_pv.x / divisor_tmp ));
+					printf("\n%01.12LE\t\t%01.12LE\n", divisor_tmp, ( (G/1E-17) * (M_sun/1E+30) * NORMALIZE_POS(cur_pv.x) / divisor_tmp * 1E+21));
 					scanf("%c",&c);
 				#endif
 
