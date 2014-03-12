@@ -4,6 +4,8 @@
 #define DAY_TO_SEC(DT) (DT * 24 * 3600)
 #define NORMALIZE_POS(A) (A/1E+08)
 
+#define _DEBUG_
+
 typedef struct struct_position_vector
 {
 	long double x,y,z;
@@ -49,9 +51,11 @@ int main(void)
 	// print initial situation
 		print_vectors(cur_pv,cur_vv,cur_t);
 	// simulation main loop
-		// xTRA Code:{
-			//finish_time = 10 * 365;
-		//}
+
+		#ifdef _DEBUG_
+			finish_time = 10 * 365;
+		#endif
+
 		while(cur_t < finish_time)
 		{
 			// increment time
@@ -66,11 +70,11 @@ int main(void)
 				next_vv.vy = cur_vv.vy - (G * M_sun * cur_pv.y / divisor_tmp );
 				next_vv.vz = cur_vv.vz - (G * M_sun * cur_pv.z / divisor_tmp );
 
-				// xTRA Code:{
-					// char c;
-					// printf("\n%01.12E\n",(G * M_sun * cur_pv.x / tmp ));
-					//scanf("%c",&c);
-				//}
+				#ifdef _DEBUG_
+					char c;
+					printf("\n%01.12LE\n",(G * M_sun * cur_pv.x / divisor_tmp ));
+					scanf("%c",&c);
+				#endif
 
 			// assign them to next
 				cur_pv = next_pv;
